@@ -1,0 +1,279 @@
+:root {
+    --primary-pink: #FFC0CB;
+    --sunset-gold: #FFD700;
+    --starry-blue: #4682B4;
+    --text-dark: #333;
+    --text-light: #f4f4f4;
+    --heading-font: 'Great Vibes', cursive;
+    --body-font: 'Montserrat', sans-serif;
+    --serif-font: 'Playfair Display', serif;
+}
+
+body {
+    font-family: var(--body-font);
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, var(--primary-pink), var(--sunset-gold));
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Animations */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #fce4ec, #fff8e1, #e3f2fd, #f3e5f5);
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+    z-index: -2;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.flower-petal, .red-saree-animation div, .floating-love {
+    pointer-events: none;
+    position: fixed;
+    z-index: -1;
+}
+
+.flower-petal {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.red-saree-animation div {
+    background-color: rgba(200, 0, 0, 0.3);
+    border-radius: 50%;
+    animation: twirlSaree 15s infinite ease-in-out;
+    opacity: 0;
+}
+
+@keyframes twirlSaree {
+    0% { transform: translate(-10%, -10%) rotate(0deg) scale(0); opacity: 0; }
+    20% { opacity: 1; }
+    50% { transform: translate(50%, 50%) rotate(180deg) scale(1.2); opacity: 0.8; }
+    80% { opacity: 1; }
+    100% { transform: translate(110%, 110%) rotate(360deg) scale(0); opacity: 0; }
+}
+
+.floating-love {
+    font-family: var(--body-font);
+    font-size: 0.9em;
+    color: rgba(255, 105, 180, 0.6);
+    animation: floatUp 20s linear infinite;
+    opacity: 0;
+    white-space: nowrap;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.8; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+header {
+    text-align: center;
+    padding: 80px 20px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-family: var(--heading-font);
+    font-size: 3.5em;
+    color: #d81b60;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+header h1::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 223, 0, 0.7) 0%, rgba(255, 223, 0, 0) 70%);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation: pulseGlow 4s infinite ease-out;
+    z-index: 0;
+}
+
+@keyframes pulseGlow {
+    0% { width: 0; height: 0; opacity: 0.8; }
+    50% { width: 300px; height: 300px; opacity: 0; }
+    100% { width: 0; height: 0; opacity: 0.8; }
+}
+
+.section {
+    background: rgba(255, 255, 255, 0.9);
+    margin: 40px auto;
+    padding: 60px 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    max-width: 900px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.section h2 {
+    font-family: var(--heading-font);
+    font-size: 3em;
+    color: #c2185b;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+}
+
+.poetic-line {
+    font-family: var(--serif-font);
+    font-style: italic;
+    font-size: 1.3em;
+    color: #880e4f;
+    margin: 20px 0;
+    padding: 10px;
+    border-left: 3px solid #f06292;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    display: block;
+}
+
+.poetic-line:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+    background-color: rgba(255, 192, 203, 0.2);
+}
+
+.photo-button {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.photo-button:hover {
+    background-color: #c2185b;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.6);
+}
+
+.music-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.music-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.music-button.playing {
+    background-color: #f44336;
+}
+
+.music-button.playing:hover {
+    background-color: #d32f2f;
+}
+
+footer {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    margin-top: 50px;
+    border-top: 1px solid #eee;
+    position: relative;
+    z-index: 1;
+}
+
+.love-declaration {
+    font-family: var(--heading-font);
+    font-size: 2.5em;
+    color: #880e4f;
+    margin-top: 30px;
+    text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.5);
+    animation: textGlow 3s infinite alternate;
+}
+
+@keyframes textGlow {
+    0% { text-shadow: 0 0 5px #ff80ab, 0 0 10px #ff80ab; }
+    100% { text-shadow: 0 0 15px #d81b60, 0 0 25px #d81b60; }
+}
+
+.photo-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.photo-modal img {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
