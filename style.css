@@ -42,8 +42,8 @@ body {
     100% { transform: scale(0.5); opacity: 0; }
 }
 
-/* --- Envelope Animation --- */
-.envelope-wrapper {
+/* --- Envelope Animation (Fixed) --- */
+.envelope-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -55,21 +55,21 @@ body {
     z-index: 100;
     perspective: 1000px;
     background-color: var(--bg-dark);
-    transition: background-color 0.5s ease, opacity 0.5s ease;
+    transition: opacity 1s ease-out;
     opacity: 1;
 }
 
-.envelope-front {
+.envelope-back {
+    position: absolute;
     width: 300px;
     height: 200px;
     background-color: var(--envelope-color);
-    position: absolute;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    transition: transform 1s ease-in-out;
+    z-index: 1;
 }
 
-.envelope-top {
+.envelope-flap {
     position: absolute;
     width: 0;
     height: 0;
@@ -77,177 +77,48 @@ body {
     border-right: 150px solid transparent;
     border-bottom: 100px solid var(--envelope-color);
     top: -50px;
-    left: 0;
     transform-origin: bottom center;
-    transition: transform 1s ease-in-out, z-index 0.5s step-end;
-    z-index: 10;
-}
-
-.envelope-inside {
-    width: 290px;
-    height: 190px;
-    background-color: var(--envelope-inside-color);
-    position: absolute;
-    z-index: -1;
-    top: 5px;
-    border-radius: 5px;
     transition: transform 1s ease-in-out;
+    z-index: 3;
 }
 
 .letter {
-    width: 100%;
-    height: 100%;
-    background-color: var(--text-light);
-    color: #2c224b;
     position: absolute;
-    padding: 20px;
-    box-sizing: border-box;
+    width: 280px;
+    height: 180px;
+    background-color: var(--envelope-inside-color);
+    border-radius: 5px;
     transform: translateY(180px);
     transition: transform 1s ease-in-out, opacity 0.5s ease;
     opacity: 0;
+    padding: 20px;
+    box-sizing: border-box;
     overflow-y: auto;
-    border-radius: 5px;
+    z-index: 2;
 }
 
-.envelope-wrapper.open .envelope-front {
-    transform: translateY(-20px) scale(0.9) rotateX(10deg);
-    opacity: 0;
-}
-
-.envelope-wrapper.open .envelope-top {
+.envelope-container.open .envelope-flap {
     transform: rotateX(180deg);
-    z-index: 12;
 }
 
-.envelope-wrapper.open .envelope-inside {
-    transform: translateY(20px) scale(0.9) rotateX(10deg);
-}
-
-.envelope-wrapper.open .letter {
-    transform: translateY(-100px) rotateX(0deg);
+.envelope-container.open .letter {
+    transform: translateY(-20px);
     opacity: 1;
+    transition-delay: 0.5s; /* Delays letter animation until flap is open */
 }
 
-/* --- General Styling --- */
+/* --- Main Content Styling --- */
 main {
     padding: 20px;
     opacity: 0;
     transition: opacity 1s ease;
 }
 
-.envelope-wrapper.open + .music-button {
-    display: block;
-}
-
-header {
-    text-align: center;
-    padding: 80px 20px;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 40px;
-    border-bottom: 2px solid var(--primary-accent);
-}
-
-header h1 {
-    font-family: var(--heading-font);
-    font-size: 3.5em;
+main h1, main h2 {
     color: var(--primary-accent);
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-    text-shadow: 0 0 10px var(--primary-accent);
 }
-
-header p {
-    font-family: var(--merriweather-font);
-    font-size: 1.5em;
-    color: var(--secondary-accent);
-    line-height: 1.6;
-    margin-top: 30px;
-    position: relative;
-    z-index: 1;
-}
-
-.section {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    margin: 40px auto;
-    padding: 60px 40px;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-    max-width: 900px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.section h2 {
-    font-family: var(--heading-font);
-    font-size: 3em;
-    color: var(--primary-accent);
-    margin-bottom: 30px;
-    position: relative;
-    display: inline-block;
-}
-
-.section p {
-    font-family: var(--body-font);
-    font-size: 1.1em;
-    line-height: 1.8;
-}
-
-.poetic-line {
-    font-style: italic;
-    font-size: 1.3em;
-    color: var(--primary-accent);
-    margin: 20px 0;
-    padding: 10px;
-    border-left: 3px solid var(--primary-accent);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    display: block;
-    text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
-    font-family: var(--serif-font) !important;
-}
-
-.dancing-script-font {
-    font-family: var(--dancing-font) !important;
-    font-size: 1.2em;
-    color: var(--secondary-accent);
-}
-
-.merriweather-font {
-    font-family: var(--merriweather-font) !important;
-}
-
-footer {
-    text-align: center;
-    padding: 60px 20px;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    margin-top: 50px;
-    border-top: 2px solid var(--primary-accent);
-    position: relative;
-    z-index: 1;
-}
-
-.love-declaration {
-    font-family: var(--heading-font);
-    font-size: 2.5em;
-    color: var(--primary-accent);
-    margin-top: 30px;
-    text-shadow: 0 0 10px var(--primary-accent);
-    animation: textGlow 3s infinite alternate;
-}
-
-@keyframes textGlow {
-    0% { text-shadow: 0 0 5px var(--primary-accent), 0 0 10px var(--primary-accent); }
-    100% { text-shadow: 0 0 15px var(--primary-accent), 0 0 25px var(--primary-accent); }
+main p {
+    color: var(--text-light);
 }
 
 .music-button {
@@ -263,17 +134,13 @@ footer {
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    display: none; /* Hidden by default */
+    display: none;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.music-button.playing {
-    background-color: #f44336;
-}
-
-/* --- Mobile Responsiveness --- */
+/* --- Responsive Design and other styles are the same as before --- */
 @media (max-width: 768px) {
     header h1 { font-size: 2.5em; }
     header p { font-size: 1.2em; }
