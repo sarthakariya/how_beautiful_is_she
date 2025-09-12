@@ -1,5 +1,5 @@
 :root {
-    --bg-dark: #0f0a1c;
+    --bg-dark: #0a0515;
     --text-light: #fefcfd;
     --primary-accent: #ff69b4; /* Hot Pink */
     --secondary-accent: #e0e0e0; /* Light Grey */
@@ -24,14 +24,14 @@ body {
     transition: background-color 0.5s ease;
 }
 
-/* --- Starry Background & Moon --- */
+/* --- Starry Background, Moon, and Particles --- */
 .star {
     position: fixed;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     animation: twinkle 5s infinite alternate;
     pointer-events: none;
-    z-index: -1;
+    z-index: -2;
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
@@ -65,7 +65,16 @@ body {
     50% { transform: translateY(-20px) translateX(-20px); }
 }
 
-/* --- Heart Loader Animation --- */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -3; /* Behind everything */
+}
+
+/* --- Uniquely Styled Heart Loader --- */
 #heart-loader {
     position: fixed;
     top: 0;
@@ -85,10 +94,12 @@ body {
     width: 120px;
     height: 120px;
     background-color: var(--heart-color);
-    transform: rotate(45deg);
     position: relative;
     box-shadow: 0 0 30px var(--heart-color);
     animation: heart-pulse 1.5s infinite ease-in-out;
+    transform: rotate(90deg); /* Right-angled heart */
+    top: -20vh; /* Off-center position */
+    left: 10vw;
 }
 
 .heart-shape::before,
@@ -115,16 +126,16 @@ body {
 .loader-message {
     font-family: var(--dancing-font);
     font-size: 2em;
-    color: var(--primary-accent);
+    color: var(--tertiary-accent);
     margin-top: 50px;
-    text-shadow: 0 0 15px var(--primary-accent);
+    text-shadow: 0 0 15px var(--tertiary-accent);
     animation: fade-in-up 1s forwards 1s;
 }
 
 @keyframes heart-pulse {
-    0% { transform: scale(1) rotate(45deg); opacity: 0.8; }
-    50% { transform: scale(1.1) rotate(45deg); opacity: 1; }
-    100% { transform: scale(1) rotate(45deg); opacity: 0.8; }
+    0% { transform: scale(0.9) rotate(90deg); opacity: 0.8; }
+    50% { transform: scale(1) rotate(90deg); opacity: 1; }
+    100% { transform: scale(0.9) rotate(90deg); opacity: 0.8; }
 }
 
 @keyframes fade-in-up {
@@ -132,7 +143,7 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Main Content Styling & Floating Effect --- */
+/* --- Main Content and Translucent Sections --- */
 .hidden-content {
     opacity: 0;
     transition: opacity 1.5s ease-in;
@@ -141,7 +152,7 @@ body {
 header {
     text-align: center;
     padding: 80px 20px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     position: relative;
@@ -157,7 +168,7 @@ header {
 }
 
 .section {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.3); /* Translucent black */
     backdrop-filter: blur(8px);
     margin: 40px auto;
     padding: 60px 40px;
@@ -183,75 +194,7 @@ header {
     50% { transform: translateY(-10px); }
 }
 
-/* --- New Section Animations and Colors --- */
-.section::before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    background: linear-gradient(45deg, var(--primary-accent), var(--tertiary-accent));
-    z-index: -1;
-    filter: blur(20px);
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.section.active::before {
-    opacity: 0.5;
-}
-
-/* --- Text Styling --- */
-header h1 {
-    font-family: var(--heading-font);
-    font-size: 3.5em;
-    color: var(--primary-accent);
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-    text-shadow: 0 0 10px var(--primary-accent);
-    animation: title-sparkle 2s infinite alternate;
-}
-
-@keyframes title-sparkle {
-    0% { text-shadow: 0 0 5px var(--primary-accent), 0 0 10px var(--primary-accent); }
-    100% { text-shadow: 0 0 15px var(--primary-accent), 0 0 25px var(--primary-accent); }
-}
-
-header p {
-    font-family: var(--merriweather-font);
-    font-size: 1.5em;
-    color: var(--secondary-accent);
-    line-height: 1.6;
-    margin-top: 30px;
-    position: relative;
-    z-index: 1;
-}
-
-.section h2 {
-    font-family: var(--heading-font);
-    font-size: 3em;
-    color: var(--primary-accent);
-    margin-bottom: 30px;
-    position: relative;
-    display: inline-block;
-    animation: section-title-glow 2s infinite alternate;
-}
-
-@keyframes section-title-glow {
-    0% { text-shadow: 0 0 5px var(--primary-accent); }
-    100% { text-shadow: 0 0 10px var(--primary-accent), 0 0 20px rgba(255, 105, 180, 0.5); }
-}
-
-.section p {
-    font-family: var(--body-font);
-    font-size: 1.1em;
-    line-height: 1.8;
-    color: var(--secondary-accent);
-}
-
-/* --- New Color on Poetic Lines --- */
+/* --- Poetic Line and Other Text Styling --- */
 .poetic-line {
     font-style: italic;
     font-family: var(--serif-font) !important;
@@ -264,31 +207,4 @@ header p {
     text-shadow: 0 0 8px rgba(255, 235, 59, 0.6); /* Yellow glow */
 }
 
-/* --- Easter Egg Styling --- */
-.easter-egg-trigger {
-    cursor: pointer;
-    font-weight: bold;
-    color: var(--primary-accent);
-    position: relative;
-}
-
-.easter-egg-message {
-    font-family: var(--dancing-font);
-    font-size: 1.5em;
-    color: var(--secondary-accent);
-    margin-top: 15px;
-    display: none;
-    opacity: 0;
-    transition: opacity 1s ease-in;
-    position: absolute;
-    bottom: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-}
-
-.easter-egg-message.active {
-    display: block;
-    opacity: 1;
-}
-/* --- Other styles are the same as before --- */
+/* --- Other styles remain the same --- */
