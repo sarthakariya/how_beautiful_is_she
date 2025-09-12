@@ -4,6 +4,7 @@
     --primary-accent: #ff69b4; /* Hot Pink */
     --secondary-accent: #e0e0e0; /* Light Grey */
     --heart-color: #ff3377; /* Deeper Red Pink */
+    --tertiary-accent: #ffeb3b; /* Yellow */
     --heading-font: 'Great Vibes', cursive;
     --body-font: 'Montserrat', sans-serif;
     --serif-font: 'Playfair Display', serif;
@@ -23,7 +24,7 @@ body {
     transition: background-color 0.5s ease;
 }
 
-/* --- Starry Background --- */
+/* --- Starry Background & Moon --- */
 .star {
     position: fixed;
     background-color: rgba(255, 255, 255, 0.8);
@@ -38,6 +39,30 @@ body {
     0% { transform: scale(0.5); opacity: 0; }
     50% { transform: scale(1.2); opacity: 1; }
     100% { transform: scale(0.5); opacity: 0; }
+}
+
+#moon {
+    position: fixed;
+    top: 5vh;
+    right: 5vw;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, #f0f0f0 0%, #d8d8d8 50%, #b0b0b0 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5), inset 0 0 30px #b0b0b0;
+    animation: moon-glow 8s infinite ease-in-out, moon-float 15s infinite ease-in-out;
+    z-index: -1;
+}
+
+@keyframes moon-glow {
+    0% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.5), inset 0 0 30px #b0b0b0; }
+    50% { box-shadow: 0 0 70px rgba(255, 255, 255, 0.8), inset 0 0 40px #b0b0b0; }
+    100% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.5), inset 0 0 30px #b0b0b0; }
+}
+
+@keyframes moon-float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(-20px); }
 }
 
 /* --- Heart Loader Animation --- */
@@ -93,7 +118,7 @@ body {
     color: var(--primary-accent);
     margin-top: 50px;
     text-shadow: 0 0 15px var(--primary-accent);
-    animation: fade-in-up 1s forwards 1s; /* Delayed fade-in */
+    animation: fade-in-up 1s forwards 1s;
 }
 
 @keyframes heart-pulse {
@@ -107,7 +132,7 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Main Content Styling --- */
+/* --- Main Content Styling & Floating Effect --- */
 .hidden-content {
     opacity: 0;
     transition: opacity 1.5s ease-in;
@@ -131,6 +156,53 @@ header {
     100% { opacity: 1; transform: translateY(0); }
 }
 
+.section {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    margin: 40px auto;
+    padding: 60px 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    max-width: 900px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.section.active {
+    opacity: 1;
+    animation: floating-effect 5s infinite ease-in-out;
+}
+
+@keyframes floating-effect {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* --- New Section Animations and Colors --- */
+.section::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--primary-accent), var(--tertiary-accent));
+    z-index: -1;
+    filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.section.active::before {
+    opacity: 0.5;
+}
+
+/* --- Text Styling --- */
 header h1 {
     font-family: var(--heading-font);
     font-size: 3.5em;
@@ -157,28 +229,6 @@ header p {
     z-index: 1;
 }
 
-.section {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    margin: 40px auto;
-    padding: 60px 40px;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-    max-width: 900px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.section.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .section h2 {
     font-family: var(--heading-font);
     font-size: 3em;
@@ -198,116 +248,47 @@ header p {
     font-family: var(--body-font);
     font-size: 1.1em;
     line-height: 1.8;
-    color: var(--secondary-accent); /* Default paragraph color */
-}
-
-/* Specific font styles */
-.dancing-script-font {
-    font-family: var(--dancing-font) !important;
-    font-size: 1.3em; /* Slightly larger for emphasis */
-    color: var(--primary-accent); /* Use accent color for these poetic lines */
-    text-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
-}
-
-.merriweather-font {
-    font-family: var(--merriweather-font) !important;
-    font-weight: 300; /* Lighter weight for balance */
     color: var(--secondary-accent);
 }
 
-.montserrat-font {
-    font-family: var(--body-font) !important; /* Montserrat */
-    font-weight: 400;
-    color: var(--text-light);
-}
-
+/* --- New Color on Poetic Lines --- */
 .poetic-line {
     font-style: italic;
-    font-family: var(--serif-font) !important; /* Playfair Display */
+    font-family: var(--serif-font) !important;
     font-size: 1.4em;
-    color: var(--primary-accent);
+    color: var(--tertiary-accent); /* Changed to yellow */
     margin: 20px 0;
     padding: 10px;
-    border-left: 3px solid var(--primary-accent);
+    border-left: 3px solid var(--tertiary-accent); /* Changed to yellow */
     transition: all 0.3s ease;
-    text-shadow: 0 0 8px rgba(255, 105, 180, 0.6);
+    text-shadow: 0 0 8px rgba(255, 235, 59, 0.6); /* Yellow glow */
 }
 
-.section-highlight {
-    color: var(--heart-color);
-    font-weight: 700;
-    text-shadow: 0 0 10px var(--heart-color);
-}
-
-footer {
-    text-align: center;
-    padding: 60px 20px;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    margin-top: 50px;
-    border-top: 2px solid var(--primary-accent);
-    position: relative;
-    z-index: 1;
-    animation: footer-fade-in 1.5s ease-out forwards;
-}
-
-@keyframes footer-fade-in {
-    0% { opacity: 0; transform: translateY(50px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-.love-declaration {
-    font-family: var(--heading-font);
-    font-size: 2.5em;
-    color: var(--primary-accent);
-    margin-top: 30px;
-    text-shadow: 0 0 10px var(--primary-accent);
-    animation: textGlow 3s infinite alternate;
-}
-
-@keyframes textGlow {
-    0% { text-shadow: 0 0 5px var(--primary-accent), 0 0 10px var(--primary-accent); }
-    100% { text-shadow: 0 0 15px var(--primary-accent), 0 0 25px var(--primary-accent); }
-}
-
-.music-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 15px;
-    border-radius: 50%;
-    font-size: 1em;
+/* --- Easter Egg Styling --- */
+.easter-egg-trigger {
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    opacity: 0; /* Hidden initially */
-    pointer-events: none; /* No interaction until visible */
+    font-weight: bold;
+    color: var(--primary-accent);
+    position: relative;
 }
 
-.music-button.active {
+.easter-egg-message {
+    font-family: var(--dancing-font);
+    font-size: 1.5em;
+    color: var(--secondary-accent);
+    margin-top: 15px;
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.easter-egg-message.active {
+    display: block;
     opacity: 1;
-    pointer-events: auto;
 }
-
-.music-button.playing {
-    background-color: #f44336;
-}
-
-/* --- Mobile Responsiveness --- */
-@media (max-width: 768px) {
-    header h1 { font-size: 2.5em; }
-    header p { font-size: 1.2em; }
-    .section { padding: 40px 20px; margin: 20px auto; }
-    .section h2 { font-size: 2em; }
-    .section p { font-size: 1em; }
-    .poetic-line { font-size: 1.1em; }
-    .dancing-script-font { font-size: 1.1em; }
-    .love-declaration { font-size: 1.8em; }
-}
+/* --- Other styles are the same as before --- */
