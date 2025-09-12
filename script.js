@@ -1,18 +1,17 @@
-// Pre-page animation and content display
+// Envelope animation and content display
 document.addEventListener('DOMContentLoaded', () => {
-    const loadingAnimation = document.getElementById('loading-animation');
+    const envelopeWrapper = document.querySelector('.envelope-wrapper');
     const mainContent = document.querySelector('main');
-    
-    // Duration of the animation
-    const animationDuration = 3000; // 3 seconds
-    
-    setTimeout(() => {
-        loadingAnimation.style.opacity = '0';
-        mainContent.style.opacity = '1';
+    const musicButton = document.getElementById('musicToggle');
+
+    // Make the envelope clickable to trigger the animation
+    envelopeWrapper.addEventListener('click', () => {
+        envelopeWrapper.classList.add('open');
         setTimeout(() => {
-            loadingAnimation.style.display = 'none';
-        }, 1000); // Wait for the fade-out
-    }, animationDuration);
+            mainContent.style.opacity = '1';
+            musicButton.style.display = 'flex';
+        }, 1500); // Delay for the letter to appear
+    });
 });
 
 // Starry background animation
@@ -29,20 +28,6 @@ function createStar() {
     star.addEventListener('animationend', () => star.remove());
 }
 setInterval(createStar, 100);
-
-// Red saree animation
-function createSareeSwirl() {
-    const swirl = document.createElement('div');
-    swirl.style.width = `${Math.random() * 200 + 100}px`;
-    swirl.style.height = `${Math.random() * 200 + 100}px`;
-    swirl.style.top = `${Math.random() * 100}vh`;
-    swirl.style.left = `${Math.random() * 100}vw`;
-    swirl.style.animationDelay = `${Math.random() * 10}s`;
-    document.querySelector('header .red-saree-animation').appendChild(swirl);
-}
-for (let i = 0; i < 5; i++) {
-    createSareeSwirl();
-}
 
 // Music toggle
 const musicToggle = document.getElementById('musicToggle');
