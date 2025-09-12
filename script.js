@@ -1,16 +1,17 @@
 // Envelope animation and content display
 document.addEventListener('DOMContentLoaded', () => {
-    const envelopeWrapper = document.querySelector('.envelope-wrapper');
+    const envelopeContainer = document.getElementById('envelope-container');
     const mainContent = document.querySelector('main');
     const musicButton = document.getElementById('musicToggle');
 
     // Make the envelope clickable to trigger the animation
-    envelopeWrapper.addEventListener('click', () => {
-        envelopeWrapper.classList.add('open');
+    envelopeContainer.addEventListener('click', () => {
+        envelopeContainer.classList.add('open');
         setTimeout(() => {
+            envelopeContainer.style.opacity = '0';
             mainContent.style.opacity = '1';
             musicButton.style.display = 'flex';
-        }, 1500); // Delay for the letter to appear
+        }, 1500); // Wait for the animation to finish
     });
 });
 
