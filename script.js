@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Particles.js initialization
             tsParticles.load("particles-js", {
                 particles: {
-                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    number: { value: 40, density: { enable: true, value_area: 800 } }, // Reduced from 80 to 40
                     color: { value: "#ffffff" },
                     shape: {
                         type: "circle",
@@ -25,12 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         polygon: { nb_sides: 5 },
                     },
                     opacity: {
-                        value: 0.5,
+                        value: 0.3, // Slightly reduced for a softer glow
                         random: false,
                         anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false },
                     },
                     size: {
-                        value: 3,
+                        value: 2.5, // Slightly smaller size
                         random: true,
                         anim: { enable: false, speed: 40, size_min: 0.1, sync: false },
                     },
@@ -38,12 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         enable: true,
                         distance: 150,
                         color: "#ffffff",
-                        opacity: 0.4,
+                        opacity: 0.2, // Reduced from 0.4 to 0.2
                         width: 1,
                     },
                     move: {
                         enable: true,
-                        speed: 6,
+                        speed: 2, // Reduced from 6 to 2 for a more subtle drift
                         direction: "none",
                         random: false,
                         straight: false,
@@ -117,15 +117,15 @@ function createStar() {
     const star = document.createElement('div');
     star.classList.add('star');
     document.body.appendChild(star);
-    const size = Math.random() * 3 + 1;
+    const size = Math.random() * 2 + 1; // Slightly smaller max size
     star.style.width = `${size}px`;
     star.style.height = `${size}px`;
     star.style.top = `${Math.random() * 100}vh`;
     star.style.left = `${Math.random() * 100}vw`;
-    star.style.animationDuration = `${Math.random() * 4 + 2}s`;
+    star.style.animationDuration = `${Math.random() * 8 + 4}s`; // Stars last longer
     star.addEventListener('animationend', () => star.remove());
 }
-setInterval(createStar, 100);
+setInterval(createStar, 300); // Slower interval for fewer stars
 
 // Music toggle
 const musicToggle = document.getElementById('musicToggle');
@@ -140,7 +140,4 @@ musicToggle.addEventListener('click', () => {
     } else {
         backgroundMusic.play();
         musicToggle.classList.add('playing');
-        musicToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-3 8v-1.88c0-1.29-.62-2.34-1.57-2.92C12.43 12.39 11 10.96 11 9.38V4.83l.01-.01c0-1.1.9-2 2-2H13c1.1 0 2 .9 2 2v4.54c0 .91.13 1.63.4 2.22l-1.35.63c-1.38.65-2.26 1.83-2.6 3.12l-1 4H9.5c.28 0 .5-.22.5-.5V14h-1c-1.1 0-2 .9-2 2s.9 2 2 2h1v-.5c0-.28.22-.5.5-.5zm7-7v2h2v-2zm-4 0h-2v2h2v-2zm-4 0h-2v2h2v-2zM4 14v-2h2v2H4zm0-4V8h2v2H4z"/></svg>';
-    }
-    isPlaying = !isPlaying;
-});
+        musicToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M
