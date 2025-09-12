@@ -5,20 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const musicButton = document.getElementById('musicToggle');
     const sections = document.querySelectorAll('.section');
 
-    // Simulate a loading time (you can adjust this)
-    const loadDuration = 3000; // 3 seconds for the heart animation to play
+    const loadDuration = 3000;
 
     setTimeout(() => {
-        heartLoader.style.opacity = '0'; // Fade out the heart loader
+        heartLoader.style.opacity = '0';
         setTimeout(() => {
-            heartLoader.style.display = 'none'; // Hide it completely
-            mainContent.style.opacity = '1'; // Fade in the main content
-            musicButton.classList.add('active'); // Show the music button
+            heartLoader.style.display = 'none';
+            mainContent.style.opacity = '1';
+            musicButton.classList.add('active');
 
-            // Trigger animations for sections as they come into view
             const observerOptions = {
                 root: null,
-                threshold: 0.2, // Trigger when 20% of element is in view
+                threshold: 0.2,
                 rootMargin: "0px"
             };
 
@@ -35,8 +33,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.observe(section);
             });
 
-        }, 1000); // 1 second for heart loader fade-out
+        }, 1000);
     }, loadDuration);
+
+    // Easter egg functionality
+    const easterEggTrigger = document.querySelector('.easter-egg-trigger');
+    const footer = document.querySelector('footer');
+
+    easterEggTrigger.addEventListener('click', () => {
+        if (document.querySelector('.easter-egg-message')) {
+            return;
+        }
+        const easterEggMessage = document.createElement('p');
+        easterEggMessage.classList.add('easter-egg-message');
+        easterEggMessage.textContent = "You found it! Your love is my favorite secret. 😊";
+        footer.appendChild(easterEggMessage);
+        
+        setTimeout(() => {
+            easterEggMessage.classList.add('active');
+        }, 100);
+    });
 });
 
 // Starry background animation
