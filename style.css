@@ -1,10 +1,9 @@
 :root {
-    --bg-dark: #0a0515;
+    --bg-dark: #0f0a1c;
     --text-light: #fefcfd;
     --primary-accent: #ff69b4; /* Hot Pink */
     --secondary-accent: #e0e0e0; /* Light Grey */
     --heart-color: #ff3377; /* Deeper Red Pink */
-    --tertiary-accent: #ffeb3b; /* Yellow */
     --heading-font: 'Great Vibes', cursive;
     --body-font: 'Montserrat', sans-serif;
     --serif-font: 'Playfair Display', serif;
@@ -24,14 +23,14 @@ body {
     transition: background-color 0.5s ease;
 }
 
-/* --- Starry Background, Moon, and Particles --- */
+/* --- Starry Background & Moon --- */
 .star {
     position: fixed;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     animation: twinkle 5s infinite alternate;
     pointer-events: none;
-    z-index: -2;
+    z-index: -1;
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
@@ -65,16 +64,7 @@ body {
     50% { transform: translateY(-20px) translateX(-20px); }
 }
 
-#particles-js {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: -3; /* Behind everything */
-}
-
-/* --- Uniquely Styled Heart Loader --- */
+/* --- Heart Loader Animation --- */
 #heart-loader {
     position: fixed;
     top: 0;
@@ -94,12 +84,10 @@ body {
     width: 120px;
     height: 120px;
     background-color: var(--heart-color);
+    transform: rotate(45deg);
     position: relative;
     box-shadow: 0 0 30px var(--heart-color);
     animation: heart-pulse 1.5s infinite ease-in-out;
-    transform: rotate(90deg); /* Right-angled heart */
-    top: -20vh; /* Off-center position */
-    left: 10vw;
 }
 
 .heart-shape::before,
@@ -126,16 +114,16 @@ body {
 .loader-message {
     font-family: var(--dancing-font);
     font-size: 2em;
-    color: var(--tertiary-accent);
+    color: var(--primary-accent);
     margin-top: 50px;
-    text-shadow: 0 0 15px var(--tertiary-accent);
+    text-shadow: 0 0 15px var(--primary-accent);
     animation: fade-in-up 1s forwards 1s;
 }
 
 @keyframes heart-pulse {
-    0% { transform: scale(0.9) rotate(90deg); opacity: 0.8; }
-    50% { transform: scale(1) rotate(90deg); opacity: 1; }
-    100% { transform: scale(0.9) rotate(90deg); opacity: 0.8; }
+    0% { transform: scale(1) rotate(45deg); opacity: 0.8; }
+    50% { transform: scale(1.1) rotate(45deg); opacity: 1; }
+    100% { transform: scale(1) rotate(45deg); opacity: 0.8; }
 }
 
 @keyframes fade-in-up {
@@ -143,7 +131,7 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Main Content and Translucent Sections --- */
+/* --- Main Content Styling & Floating Effect --- */
 .hidden-content {
     opacity: 0;
     transition: opacity 1.5s ease-in;
@@ -152,7 +140,7 @@ body {
 header {
     text-align: center;
     padding: 80px 20px;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     position: relative;
@@ -168,7 +156,7 @@ header {
 }
 
 .section {
-    background: rgba(0, 0, 0, 0.3); /* Translucent black */
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(8px);
     margin: 40px auto;
     padding: 60px 40px;
@@ -194,17 +182,48 @@ header {
     50% { transform: translateY(-10px); }
 }
 
-/* --- Poetic Line and Other Text Styling --- */
-.poetic-line {
-    font-style: italic;
-    font-family: var(--serif-font) !important;
-    font-size: 1.4em;
-    color: var(--tertiary-accent); /* Changed to yellow */
-    margin: 20px 0;
-    padding: 10px;
-    border-left: 3px solid var(--tertiary-accent); /* Changed to yellow */
-    transition: all 0.3s ease;
-    text-shadow: 0 0 8px rgba(255, 235, 59, 0.6); /* Yellow glow */
+/* --- Easter Egg Styling --- */
+.easter-egg-trigger {
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--primary-accent);
+    position: relative;
 }
 
-/* --- Other styles remain the same --- */
+.easter-egg-message {
+    font-family: var(--dancing-font);
+    font-size: 1.5em;
+    color: var(--secondary-accent);
+    margin-top: 15px;
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.easter-egg-message.active {
+    display: block;
+    opacity: 1;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    #moon {
+        width: 150px;
+        height: 150px;
+        top: 2vh;
+        right: 2vw;
+    }
+    header h1 { font-size: 2.5em; }
+    header p { font-size: 1.2em; }
+    .section { padding: 40px 20px; margin: 20px auto; }
+    .section h2 { font-size: 2em; }
+    .section p { font-size: 1em; }
+    .poetic-line { font-size: 1.1em; }
+    .dancing-script-font { font-size: 1.1em; }
+    .love-declaration { font-size: 1.8em; }
+}
