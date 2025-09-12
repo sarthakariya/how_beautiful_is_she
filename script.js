@@ -1,18 +1,42 @@
-// Envelope animation and content display
+// Heart loader animation and content reveal
 document.addEventListener('DOMContentLoaded', () => {
-    const envelopeContainer = document.getElementById('envelope-container');
+    const heartLoader = document.getElementById('heart-loader');
     const mainContent = document.querySelector('main');
     const musicButton = document.getElementById('musicToggle');
+    const sections = document.querySelectorAll('.section');
 
-    // Make the envelope clickable to trigger the animation
-    envelopeContainer.addEventListener('click', () => {
-        envelopeContainer.classList.add('open');
+    // Simulate a loading time (you can adjust this)
+    const loadDuration = 3000; // 3 seconds for the heart animation to play
+
+    setTimeout(() => {
+        heartLoader.style.opacity = '0'; // Fade out the heart loader
         setTimeout(() => {
-            envelopeContainer.style.opacity = '0';
-            mainContent.style.opacity = '1';
-            musicButton.style.display = 'flex';
-        }, 1500); // Wait for the animation to finish
-    });
+            heartLoader.style.display = 'none'; // Hide it completely
+            mainContent.style.opacity = '1'; // Fade in the main content
+            musicButton.classList.add('active'); // Show the music button
+
+            // Trigger animations for sections as they come into view
+            const observerOptions = {
+                root: null,
+                threshold: 0.2, // Trigger when 20% of element is in view
+                rootMargin: "0px"
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+        }, 1000); // 1 second for heart loader fade-out
+    }, loadDuration);
 });
 
 // Starry background animation
